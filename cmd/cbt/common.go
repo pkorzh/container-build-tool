@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/pkorzh/container-build-tool/pkg/storage"
+	"github.com/pkorzh/container-build-tool/internal/storage"
 )
 
 func getStore() (storage.Store, error) {

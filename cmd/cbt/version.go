@@ -7,6 +7,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	Version string = "dev"
+)
+
 func init() {
 	var versionCmd = &cobra.Command{
 		Use:   "version",
@@ -22,6 +26,7 @@ func init() {
 }
 
 func handleVersionCmd() error {
+	fmt.Println("Version:         ", Version)
 	fmt.Println("Runtime version: ", runtime.Version())
 	fmt.Println("OS/Arch:         ", runtime.GOOS+"/"+runtime.GOARCH)
 	return nil

@@ -67,6 +67,10 @@ var bootstrapCmd = &cobra.Command{
 
 		args = []string{"/bin/bash"}
 
+		//This causes the program that is currently being run by the calling
+		// process to be replaced with a new program, with newly initialized
+		// stack, heap, and (initialized and uninitialized) data segments.
+
 		C.create_argv(C.int(len(args)))
 		for i, arg := range args {
 			cArg := C.CString(arg)
@@ -81,7 +85,7 @@ var bootstrapCmd = &cobra.Command{
 }
 
 func pivotRoot(root string) error {
-	// We need this to satisfy restriction: `new_root` and `put_old` must **not** be on the same filesystem as the current root.
+	// We need this to satisfy restriction of `PivotRoot`: `new_root` and `put_old` must **not** be on the same filesystem as the current root.
 	if err := unix.Mount(root, root, "bind", unix.MS_BIND|unix.MS_REC, ""); err != nil {
 		return fmt.Errorf("mount rootfs to itself: %v", err)
 	}
